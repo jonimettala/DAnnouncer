@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DAnnouncer</string>
+    <string name="webhook_name">Webhook Name</string>
+    <string name="webhook_url">Webhook URL</string>
+    <string name="content">Message</string>
+    <string name="send">Announce</string>
+    <string name="title_activity_webhook_list">Saved Webhooks</string>
+    <string name="saved_webhooks">Saved Webhooks</string>
+    <string name="add_webhook">Add Webhook</string>
+</resources>
