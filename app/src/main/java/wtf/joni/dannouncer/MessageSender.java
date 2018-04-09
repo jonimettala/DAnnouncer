@@ -50,7 +50,7 @@ public class MessageSender {
             {
                 Map<String, String>  params = new HashMap<>();
                 params.put("content", message.getContent());
-                String username = message.getUser();
+                String username = message.getUsername();
                 if (username != null) {
                     Debug.print(TAG, "send(): getParams()", username);
                     params.put("username", username);

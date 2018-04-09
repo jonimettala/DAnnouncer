@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public void buttonClicked(View view) {
         switch (view.getId()) {
             case R.id.send:
-                sendMessage();
+                handleMessageSend();
                 break;
             case R.id.list_webhooks:
                 Intent intent = new Intent(this, WebhookListActivity.class);
@@ -30,42 +30,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void sendMessage() {
-        String url = ((EditText) findViewById(R.id.webhook_url)).getText().toString();
-        String content = ((EditText) findViewById(R.id.content)).getText().toString();
-        String username = ((EditText) findViewById(R.id.user)).getText().toString();
-        if (!checkContent(url, content) || !checkUsername(username)) {
-            Debug.print(TAG, "sendMessage()", "Invalid data");
-        } else {
-            MessageSender sender = new MessageSender(url, this);
-            Message message = new Message(url, content);
-            handleSetOptionalData(message, username);
+    public void handleMessageSend() {
+        Message message = new Message();
+        message.setUrl(((EditText) findViewById(R.id.webhook_url)).getText().toString());
+        message.setContent(((EditText) findViewById(R.id.content)).getText().toString());
+        message.setUsername(((EditText) findViewById(R.id.user)).getText().toString());
+        if (validateMessage(message)) {
+            MessageSender sender = new MessageSender(message.getUrl(), this);
             sender.send(message);
         }
     }
 
-    private boolean checkContent(String url, String content) {
-        if (url.length() == 0 || content.length() == 0) {
+    private boolean validateMessage(Message message) {
+        boolean validated = true;
+        if (message.getUrl().length() == 0 || message.getContent().length() == 0) {
+            validated = false;
             Toast.makeText(getApplicationContext(), "URL and message must be given.",
                     Toast.LENGTH_SHORT).show();
-            return false;
         }
-        return true;
-    }
-
-    private boolean checkUsername(String username) {
-        if (username.length() == 1) {
+        if (message.getUsername().length() == 1) {
+            validated = false;
             Toast.makeText(getApplicationContext(), "Sender name must be empty or at least " +
-                            "two characters long.", Toast.LENGTH_SHORT).show();
-            return false;
+                    "two characters long.", Toast.LENGTH_SHORT).show();
         }
-        return true;
-    }
-
-    private void handleSetOptionalData(Message message, String username) {
-        if (username.length() > 0) {
-            message.setUser(username);
-        }
+        Debug.print(TAG, "validateMessage()", "Validation result: " + validated);
+        return validated;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
