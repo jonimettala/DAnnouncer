@@ -18,16 +18,6 @@ public class MainActivity extends AppCompatActivity {
         Debug.loadDebug(this);
     }
 
-    public String handleGetContent() {
-        String message = ((EditText) findViewById(R.id.content)).getText().toString();
-        if (message.length() > 0) {
-            return message;
-        } else {
-            return "This should never be printed. But if that happened, I'm just leaving this " +
-                    "here: https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-        }
-    }
-
     public void buttonClicked(View view) {
         switch (view.getId()) {
             case R.id.send:
