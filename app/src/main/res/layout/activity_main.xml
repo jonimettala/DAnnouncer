@@ -34,8 +34,9 @@
         android:layout_height="wrap_content"
         android:onClick="buttonClicked"/>
 
-    <TextView
-        android:id="@+id/text"
+    <EditText
+        android:id="@+id/user"
+        android:hint="@string/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

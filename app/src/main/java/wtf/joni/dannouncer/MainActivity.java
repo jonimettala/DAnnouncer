@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     static final int PICK_WEBHOOK_URL_REQUEST = 0;
+    final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         if (message.length() > 0) {
             return message;
         } else {
-            return "Placeholder message because no message set and I need to invent something better here";
+            return "This should never be printed. But if that happened, I'm just leaving this " +
+                    "here: https://www.youtube.com/watch?v=dQw4w9WgXcQ";
         }
     }
 
@@ -41,21 +43,38 @@ public class MainActivity extends AppCompatActivity {
     public void sendMessage() {
         String url = ((EditText) findViewById(R.id.webhook_url)).getText().toString();
         String content = ((EditText) findViewById(R.id.content)).getText().toString();
-        if (url.length() == 0 || content.length() == 0) {
-            Toast.makeText(getApplicationContext(), "URL and message must be given.",
-                    Toast.LENGTH_SHORT).show();
+        String username = ((EditText) findViewById(R.id.user)).getText().toString();
+        if (!checkContent(url, content) || !checkUsername(username)) {
+            Debug.print(TAG, "sendMessage()", "Invalid data");
         } else {
             MessageSender sender = new MessageSender(url, this);
-            Message message = new Message(url, handleGetContent());
-            handleSetOptionalData(message);
+            Message message = new Message(url, content);
+            handleSetOptionalData(message, username);
             sender.send(message);
         }
     }
 
-    private void handleSetOptionalData(Message message) {
-        String user = ((EditText) findViewById(R.id.user)).getText().toString();
-        if (user.length() > 0) {
-            message.setUser(user);
+    private boolean checkContent(String url, String content) {
+        if (url.length() == 0 || content.length() == 0) {
+            Toast.makeText(getApplicationContext(), "URL and message must be given.",
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkUsername(String username) {
+        if (username.length() == 1) {
+            Toast.makeText(getApplicationContext(), "Sender name must be empty or at least " +
+                            "two characters long.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void handleSetOptionalData(Message message, String username) {
+        if (username.length() > 0) {
+            message.setUser(username);
         }
     }
 
