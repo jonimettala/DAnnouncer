@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Debug.loadDebug(this);
     }
 
     public String handleGetContent() {
@@ -46,7 +47,15 @@ public class MainActivity extends AppCompatActivity {
         } else {
             MessageSender sender = new MessageSender(url, this);
             Message message = new Message(url, handleGetContent());
+            handleSetOptionalData(message);
             sender.send(message);
+        }
+    }
+
+    private void handleSetOptionalData(Message message) {
+        String user = ((EditText) findViewById(R.id.user)).getText().toString();
+        if (user.length() > 0) {
+            message.setUser(user);
         }
     }
 

@@ -21,6 +21,7 @@ import java.util.Map;
 public class MessageSender {
     Context context;
     String url;
+    String TAG = "MessageSender";
 
     public MessageSender(String url, Context context) {
         this.context = context;
@@ -33,6 +34,7 @@ public class MessageSender {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        /*
                         try {
                             JSONObject jsonResponse = new JSONObject(response).getJSONObject("form");
                             String site = jsonResponse.getString("site"),
@@ -41,11 +43,14 @@ public class MessageSender {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        */
+                        Debug.print(TAG, "send(): onResponse()", "Announcement sent");
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Debug.print(TAG, "send(): onErrorResponse()");
                         error.printStackTrace();
                     }
                 }
@@ -54,7 +59,6 @@ public class MessageSender {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<>();
-                // the POST parameters:
                 params.put("content", message.getContent());
                 return params;
             }

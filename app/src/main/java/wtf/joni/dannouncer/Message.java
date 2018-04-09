@@ -7,6 +7,7 @@ package wtf.joni.dannouncer;
 public class Message {
     String url;
     String content;
+    String user;
 
     public Message(String url, String content) {
         this.url = url;
@@ -27,5 +28,13 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

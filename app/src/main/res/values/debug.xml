@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="debugLevel">5</string>
+    <string name="debugConsole">true</string>
+    <string name="debugToast">false</string>
+</resources>

@@ -7,4 +7,5 @@
     <string name="title_activity_webhook_list">Saved Webhooks</string>
     <string name="saved_webhooks">Saved Webhooks</string>
     <string name="add_webhook">Add Webhook</string>
+    <string name="user">Sender Name (optional)</string>
 </resources>
