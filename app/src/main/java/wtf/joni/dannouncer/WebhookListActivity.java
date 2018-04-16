@@ -1,5 +1,6 @@
 package wtf.joni.dannouncer;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,11 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebhookListActivity extends AppCompatActivity {
+
     static final int PICK_WEBHOOK_INFO_REQUEST = 0;
 
     private List<Webhook> webhookList = new ArrayList<>();
     private RecyclerView recyclerView;
     private WebhooksAdapeter mAdapter;
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,9 @@ public class WebhookListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_webhook_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "dannouncer-database").build();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -56,6 +62,12 @@ public class WebhookListActivity extends AppCompatActivity {
 
         prepareWebhookData();
 
+        new Thread(new Runnable() {
+            public void run() {
+                webhookList.addAll(db.webhookDao().getAll());
+            }
+        }).start();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         final Context context = this;
         fab.setOnClickListener(new View.OnClickListener() {
@@ -80,8 +92,13 @@ public class WebhookListActivity extends AppCompatActivity {
                 String webhookName = data.getStringExtra("webhookName");
                 String webhookUrl = data.getStringExtra("webhookUrl");
 
-                Webhook webhook = new Webhook(webhookName, webhookUrl);
+                final Webhook webhook = new Webhook(webhookName, webhookUrl);
                 webhookList.add(webhook);
+                new Thread(new Runnable() {
+                    public void run() {
+                        db.webhookDao().insertAll(webhook);
+                    }
+                }).start();
 
                 mAdapter.notifyDataSetChanged();
             }
