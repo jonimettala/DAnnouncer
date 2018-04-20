@@ -2,9 +2,11 @@ package wtf.joni.dannouncer;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -29,6 +31,7 @@ public class WebhookListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private WebhooksAdapeter mAdapter;
     private AppDatabase db;
+    private final String TAG = "WebhookListActivity";
 
     /**
      * Handles creating the activity.
@@ -64,7 +67,8 @@ public class WebhookListActivity extends AppCompatActivity {
             }
             @Override
             public void onLongClick(View view, int position) {
-
+                Webhook webhook = webhookList.get(position);
+                handleDeleteDialog(webhook);
             }
         }));
 
@@ -85,6 +89,39 @@ public class WebhookListActivity extends AppCompatActivity {
                 startActivityForResult(intent, PICK_WEBHOOK_INFO_REQUEST);
             }
         });
+    }
+
+    /**
+     * Handles the delete dialog and Webhook deleting.
+     *
+     * @param webhook Selected webhook
+     */
+    public void handleDeleteDialog(Webhook webhook) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final Webhook hook = webhook;
+        builder.setMessage("Do you want to delete webhook " + hook.getName()).setTitle("Delete Webhook");
+
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                webhookList.remove(hook);
+                new Thread(new Runnable() {
+                    public void run() {
+                        db.webhookDao().delete(hook);
+                    }
+                }).start();
+                mAdapter.notifyDataSetChanged();
+                Debug.print(TAG, "handleDeleteDialog()", "Webhook deleted");
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Debug.print(TAG, "handleDeleteDialog()", "Webhook delete cancelled");
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     /**
