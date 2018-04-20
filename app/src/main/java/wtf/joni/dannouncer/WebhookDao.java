@@ -24,14 +24,6 @@ public interface WebhookDao {
     List<Webhook> getAll();
 
     /**
-     *
-     * @param userIds
-     * @return
-     */
-    @Query("SELECT * FROM webhook WHERE uid IN (:userIds)")
-    List<Webhook> loadAllByIds(int[] userIds);
-
-    /**
      * Gets a specific webhook from phone memory.
      *
      * @param hookName Webhook name
