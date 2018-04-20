@@ -15,19 +15,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Joni Mettälä on 17-Mar-18.
+ * This class handles sending HTTP POST requests to Discord API.
+ *
+ * @author Joni Mettälä
  */
-
 public class MessageSender {
     Context context;
     String url;
     final String TAG = "MessageSender";
 
+    /**
+     * Constructs the MessageSender object.
+     *
+     * @param url The Discord HTTP POST request url (also known as Discord webhook)
+     * @param context Context of the activity which uses the object
+     */
     public MessageSender(String url, Context context) {
         this.context = context;
         this.url = url;
     }
 
+    /**
+     * Sends given Message object to the defined webhook url.
+     *
+     * @param msg Message object which will be sent.
+     * @see Message
+     */
     public void send(Message msg) {
         final Message message = msg;
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,

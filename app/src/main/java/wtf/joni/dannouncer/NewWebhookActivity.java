@@ -7,14 +7,28 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Activity which is used to add new webhooks to the application.
+ *
+ * @author Joni Mettälä
+ */
 public class NewWebhookActivity extends AppCompatActivity {
 
+    /**
+     * Handles creating the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_webhook);
     }
 
+    /**
+     * Handles button click in the activity. Checks if the information set to new webhook is ok
+     * and returns the parameters to WebhookListActivity.
+     *
+     * @param view Activity view
+     */
     public void clicked(View view) {
         Intent intent = this.getIntent();
         String webhookName = ((EditText) findViewById(R.id.webhook_name)).getText().toString();

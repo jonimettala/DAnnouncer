@@ -16,6 +16,11 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity which lists all the webhooks saved in phone.
+ *
+ * @author Joni Mettälä
+ */
 public class WebhookListActivity extends AppCompatActivity {
 
     static final int PICK_WEBHOOK_INFO_REQUEST = 0;
@@ -25,6 +30,9 @@ public class WebhookListActivity extends AppCompatActivity {
     private WebhooksAdapeter mAdapter;
     private AppDatabase db;
 
+    /**
+     * Handles creating the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,13 +87,21 @@ public class WebhookListActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Prepares data shown in the list.
+     */
     private void prepareWebhookData() {
-        Webhook webhook = new Webhook("Test", "url-placeholder");
-        webhookList.add(webhook);
+        // Webhook webhook = new Webhook("Test", "url-placeholder");
+        // webhookList.add(webhook);
 
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Handles adding a new webhook to the list if something was set in NewWebhookActitivy.
+     *
+     * @param data Intent to be reviewed
+     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PICK_WEBHOOK_INFO_REQUEST) {
             if (resultCode == RESULT_OK) {

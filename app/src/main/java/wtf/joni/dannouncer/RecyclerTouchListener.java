@@ -7,9 +7,10 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * Created by Joni Mettälä on 18-Mar-18.
+ * Listens to touches in WebhookListActivity.
+ *
+ * @author Joni Mettälä
  */
-
 public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
     public interface ClickListener {
@@ -20,6 +21,9 @@ public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
     private GestureDetector gestureDetector;
     private ClickListener clickListener;
 
+    /**
+     * Creates a new listener.
+     */
     public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
         this.clickListener = clickListener;
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
