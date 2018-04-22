@@ -8,13 +8,4 @@
     <string name="saved_webhooks">Saved Webhooks</string>
     <string name="add_webhook">Add Webhook</string>
     <string name="user">Sender Name</string>
-    <string name="embed_link_url">Embed Link URL</string>
-    <string name="embed_link_text">Embed Link Text</string>
-    <string name="embed_description">Embed Description</string>
-    <string name="field_name_1">Embed Field Name 1</string>
-    <string name="field_text_1">Embed Field Text 1</string>
-    <string name="field_name_2">Embed Field Name 2</string>
-    <string name="field_text_2">Embed Field Text 2</string>
-    <string name="field_name_3">Embed Field Name 3</string>
-    <string name="field_text_3">Embed Field Text 3</string>
 </resources>

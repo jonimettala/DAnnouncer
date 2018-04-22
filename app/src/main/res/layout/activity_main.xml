@@ -14,6 +14,18 @@
         android:layout_height="wrap_content"
         android:inputType="textUri"/>
 
+    <EditText
+        android:id="@+id/content"
+        android:hint="@string/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/user"
+        android:hint="@string/user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/list_webhooks"
         android:text="@string/saved_webhooks"
@@ -28,81 +40,4 @@
         android:layout_height="wrap_content"
         android:onClick="buttonClicked"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/content"
-                android:hint="@string/content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/user"
-                android:hint="@string/user"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/embedLinkUrl"
-                android:hint="@string/embed_link_url"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/embedLinkText"
-                android:hint="@string/embed_link_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/embedDescription"
-                android:hint="@string/embed_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/embedFieldName1"
-                android:hint="@string/field_name_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/embedFieldText1"
-                android:hint="@string/field_text_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/embedFieldName2"
-                android:hint="@string/field_name_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/embedFieldText2"
-                android:hint="@string/field_text_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/embedFieldName3"
-                android:hint="@string/field_name_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/embedFieldText3"
-                android:hint="@string/field_text_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>
