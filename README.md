@@ -7,7 +7,7 @@ DAnnouncer saves saved webhooks to the user's phone. No other data is saved. All
 
 ## About The Project
 
-This is my course work for Tampere University of Applied Sciences's Android development course. The application can be found from Google Play (unless it gets taken down for some reason).
+This is my course work for Tampere University of Applied Sciences's Android development course. The application can be found from [Google Play](https://play.google.com/store/apps/details?id=wtf.joni.dannouncer) (unless it gets taken down for some reason).
 
 The application is designed for experienced Discord community administrators. There is no help for questions like what is a webhook and how to get its url.
 
