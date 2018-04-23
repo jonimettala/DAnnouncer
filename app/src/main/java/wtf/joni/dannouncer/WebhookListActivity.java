@@ -100,7 +100,7 @@ public class WebhookListActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         final Webhook hook = webhook;
-        builder.setMessage("Do you want to delete webhook " + hook.getName()).setTitle("Delete Webhook");
+        builder.setMessage("Do you want to delete webhook " + hook.getName() + "?").setTitle("Delete Webhook");
 
         builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -128,9 +128,6 @@ public class WebhookListActivity extends AppCompatActivity {
      * Prepares data shown in the list.
      */
     private void prepareWebhookData() {
-        // Webhook webhook = new Webhook("Test", "url-placeholder");
-        // webhookList.add(webhook);
-
         mAdapter.notifyDataSetChanged();
     }
 
