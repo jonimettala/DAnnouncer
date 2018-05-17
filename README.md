@@ -12,3 +12,5 @@ This is my course work for Tampere University of Applied Sciences's Android deve
 The application is designed for experienced Discord community administrators. There is no help for questions like what is a webhook and how to get its url.
 
 The application is missing lots of useful options (embeddable Discord data). They won't be implemented in the future. Sorry, I'd have loved to use them too.
+
+Javadoc: https://jonimettala.github.io/DAnnouncer/
